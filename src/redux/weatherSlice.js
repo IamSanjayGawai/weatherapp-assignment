@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const weatherSlice = createSlice({
   name: "weather",
   initialState: {
-    lastCity: localStorage.getItem("lastCity") || "New York",
+    lastCity: localStorage.getItem("lastCity") || "Delhi",
     unit: "metric",
   },
   reducers: {
