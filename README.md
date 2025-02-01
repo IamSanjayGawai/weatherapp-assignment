@@ -24,7 +24,6 @@ A weather dashboard application that provides real-time weather data for any cit
 - **BMCDN**: For weather icons.
 - **OpenWeather API**: To fetch weather data.
 
-## Installation
 
 ## Installation
 
