@@ -68,6 +68,10 @@ const WeatherCard = () => {
 
   const cardBackground = data ? getWeatherBackground(data.weather[0].description) : '';
 
+  const currentDate = new Date();
+  const dateTime = currentDate.toLocaleString();
+  const dayOfWeek = currentDate.toLocaleString('en-US', { weekday: 'long' });
+
   if (isLoading) return <Message>Loading...</Message>;
   if (error) return <Message>Error: {error.message}</Message>;
   if (!data) return <Message>Search for a city to get started.</Message>;
@@ -101,6 +105,9 @@ const WeatherCard = () => {
                 {data.main.temp.toFixed(1)}°{unit === "metric" ? "C" : "F"}
               </p>
             </Temperature>
+            <DateTime>
+            <p>{dayOfWeek}, {dateTime}</p>
+            </DateTime>
           </RightContent>
         </RowLayout>
       </WeatherDetails>
@@ -117,7 +124,7 @@ const Card = styled.div`
   border-radius: 20px;
   text-align: center;
   width: 80%;
-  height: 260px;
+  height: 300px;
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   background-size: cover;
@@ -191,6 +198,13 @@ const AdditionalInfo = styled.div`
     gap: 20px
     
   }
+`;
+
+const DateTime = styled.div`
+  font-size: 18px;
+  font-weight: 400;
+  margin-top: 10px;
+  font-weight: 400;
 `;
 
 const Message = styled.p`
