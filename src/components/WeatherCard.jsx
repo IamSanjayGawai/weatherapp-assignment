@@ -18,27 +18,32 @@ const WeatherCard = () => {
   const getWeatherImage = (weatherDescription) => {
     switch (weatherDescription) {
       case 'clear sky':
-        return "https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/sun.svg";  // Clear sky icon
+        return "wi wi-day-sunny";  // Weather Icons sunny icon
       case 'few clouds':
       case 'scattered clouds':
-        return "https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/cloud.svg";  // Few clouds icon
-        case 'broken clouds':
-            return "https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/broken-clouds.svg";  // Broken clouds icon
       case 'overcast clouds':
-        return "https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/cloud.svg";  // Cloudy icon
+        return "wi wi-cloud";  // Weather Icons cloud icon
+      case 'broken clouds':
+        return "wi wi-cloudy";  // Weather Icons broken cloud icon
       case 'light rain':
       case 'moderate rain':
       case 'heavy rain':
       case 'shower rain':
-        return "https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/rain.svg";  // Rain icon
+        return "wi wi-rain";  // Weather Icons rain icon
       case 'snow':
-        return "https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/snow.svg";  // Snow icon
+        return "wi wi-snow";  // Weather Icons snow icon
       case 'haze':
-        return "https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/haze.svg";  // Haze icon
+        return "wi wi-day-haze";  // Weather Icons haze icon
       case 'smoke':
-        return "https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/smoke.svg";  // Smoke icon
+        return "wi wi-smoke";  // Weather Icons smoke icon
+      case 'thunderstorm':
+        return "wi wi-thunderstorm";  // Weather Icons thunderstorm icon
+      case 'tornado':
+        return "wi wi-tornado";  // Weather Icons tornado icon
+      case 'drizzle':
+        return "wi wi-showers";  // Weather Icons drizzle icon
       default:
-        return "https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/cloud.svg";  // Default cloudy icon
+        return "wi wi-cloud";  // Default cloud icon
     }
   };
 
@@ -61,6 +66,12 @@ const WeatherCard = () => {
         return "url('https://images.unsplash.com/photo-1505275367032-e83b4ba1198f')";  // Hazy background
       case 'smoke':
         return "url('https://images.unsplash.com/photo-1505275367032-e83b4ba1198f')";  // Hazy background (same as haze)
+      case 'thunderstorm':
+        return "url('https://images.unsplash.com/photo-1473490130853-0a0b5a195b10')";  // Thunderstorm background
+      case 'tornado':
+        return "url('https://images.unsplash.com/photo-1515937473345-9d88f464defd')";  // Tornado background
+      case 'drizzle':
+        return "url('https://images.unsplash.com/photo-1487076710551-d30362ee8a85')";  // Drizzle background
       default:
         return "url('https://images.unsplash.com/photo-1521747116042-5b26da38fdf5')";  // Default cloudy background
     }
@@ -82,10 +93,7 @@ const WeatherCard = () => {
         <RowLayout>
           <LeftContent>
             <WeatherIcon>
-              <img
-                src={getWeatherImage(data.weather[0].description)}
-                alt="Weather Icon"
-              />
+              <i className={getWeatherImage(data.weather[0].description)} style={{ fontSize: "80px", color: "white" }}></i>
             </WeatherIcon>
             <Description>{data.weather[0].description}</Description>
             <AdditionalInfo>
@@ -106,7 +114,7 @@ const WeatherCard = () => {
               </p>
             </Temperature>
             <DateTime>
-            <p>{dayOfWeek}, {dateTime}</p>
+              <p>{dayOfWeek}, {dateTime}</p>
             </DateTime>
           </RightContent>
         </RowLayout>
@@ -119,7 +127,7 @@ export default WeatherCard;
 
 // Styled Components
 const Card = styled.div`
-  background: ${({ background }) => background}, linear-gradient(145deg,rgb(48, 140, 233),rgb(225, 242, 252));
+  background: ${({ background }) => background}, linear-gradient(145deg, rgb(48, 140, 233), rgb(225, 242, 252));
   padding: 20px;
   border-radius: 20px;
   text-align: center;
@@ -140,8 +148,7 @@ const RowLayout = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
- padding: 0px 70px 50px;
- 
+  padding: 0px 70px 50px;
 `;
 
 const LeftContent = styled.div`
@@ -174,9 +181,9 @@ const Temperature = styled.div`
 `;
 
 const WeatherIcon = styled.div`
-  img {
-    width: 80px;
-    height: 80px;
+  i {
+    font-size: 80px;
+    color: white;
   }
 `;
 
@@ -194,9 +201,8 @@ const AdditionalInfo = styled.div`
     color: #fff;
     margin: 5px 0;
     font-weight: 600;
-    display:flex;
-    gap: 20px
-    
+    display: flex;
+    gap: 20px;
   }
 `;
 
@@ -204,7 +210,6 @@ const DateTime = styled.div`
   font-size: 18px;
   font-weight: 400;
   margin-top: 10px;
-  font-weight: 400;
 `;
 
 const Message = styled.p`
@@ -212,3 +217,4 @@ const Message = styled.p`
   text-align: center;
   color: #888;
 `;
+
